@@ -2,12 +2,12 @@
 
 /*/////////////////Multilevel Menu css/////////////////*/
 .JSWM_window_handle {
-	width: 100%;
+	width: 40px;
 	/*max-width: 16px;
 	float: left;*/
 	position: relative;
 	z-index: 1;
-	opacity:1;
+	opacity:0;
 
 }
 

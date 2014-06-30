@@ -16,7 +16,6 @@
 
 .JSWM_window_handle
 {
-	border: 1px solid;
 	height: 20px;
 	line-height: 20px;
 	width: 40px !important;

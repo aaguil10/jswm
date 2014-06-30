@@ -18,6 +18,139 @@
 
 <body>
 <center><h1>JSWM In Content</h1></center>
+
+<div class='JSWM_window_handle' id='menuTwo'>
+	<div class='dl-trigger'>
+		<img src='jswm_jquery/windowMenu/menubtn.png' height='40' width='40'>
+	</div>
+	<ul id='ul-menu' class='menu'>
+		<li><a href='#'>
+			<img class='menu_img' src='imgs/close.png' height='15' width='15' onclick='closeWindow()'>
+			<img class='menu_img' src='imgs/maximize_window.png' height='15' width='15' onclick='maxWindow()'>
+			<img class='menu_img' src='imgs/dock_left.png' height='15' width='15'>
+			<img class='menu_img' src='imgs/dock_right.png' height='15' width='15'>
+		</a></li>
+		<li><a href="#">Bird</a>
+		<ul class="sub_menu">
+			<li><a class="backbtn" href="#">Back</a></li>
+			<li><a href="#">Falcons</a></li>
+			<li><a href="#">Sparrows</a></li>
+			<li><a href="#">Hawks</a></li>
+			<li><a href="#">Doves</a></li>
+			<li><a href="#">Ducks</a></li>
+			<li><a href="#">Finches</a></li>
+			<li><a href="#">Crows</a></li>
+			<li><a href="#">Owls</a></li>
+		</ul>
+	</li>
+	    <li><a href="#">Mammal</a>
+		<ul class="sub_menu">
+			<li><a class="backbtn" href="#">Back</a></li>
+			<li><a href="#">Humans</a>
+				<ul class="sub_menu">
+					<li><a class="backbtn" href="#">Back</a></li>
+					<li><a href="#">Mexicans</a></li>
+					<li><a href="#">Asians</a></li>
+					<li><a href="#">Africans</a></li>
+					<li><a href="#">Filipinos</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Dogs</a></li>
+			<li><a href="#">Cats</a></li>
+		</ul>
+	</li>
+	</ul>
+</div><br><br>
+
+
+
+
+<div class='JSWM_window_handle' id='menuOne'>
+	<div class='dl-trigger'>
+		<img src='jswm_jquery/windowMenu/menubtn.png' height='40' width='40'>
+	</div>
+	<ul id='ul-menu' class='menu'>
+		<li><a href='#'>
+			<img class='menu_img' src='imgs/close.png' height='15' width='15' onclick='closeWindow()'>
+			<img class='menu_img' src='imgs/maximize_window.png' height='15' width='15' onclick='maxWindow()'>
+			<img class='menu_img' src='imgs/dock_left.png' height='15' width='15'>
+			<img class='menu_img' src='imgs/dock_right.png' height='15' width='15'>
+		</a></li>
+		<li><a href="#">Bird</a>
+		<ul class="sub_menu">
+			<li><a class="backbtn" href="#">Back</a></li>
+			<li><a href="#">Falcons</a></li>
+			<li><a href="#">Sparrows</a></li>
+			<li><a href="#">Hawks</a></li>
+			<li><a href="#">Doves</a></li>
+			<li><a href="#">Ducks</a></li>
+			<li><a href="#">Finches</a></li>
+			<li><a href="#">Crows</a></li>
+			<li><a href="#">Owls</a></li>
+		</ul>
+	</li>
+	    <li><a href="#">Mammal</a>
+		<ul class="sub_menu">
+			<li><a class="backbtn" href="#">Back</a></li>
+			<li><a href="#">Humans</a>
+				<ul class="sub_menu">
+					<li><a class="backbtn" href="#">Back</a></li>
+					<li><a href="#">Mexicans</a></li>
+					<li><a href="#">Asians</a></li>
+					<li><a href="#">Africans</a></li>
+					<li><a href="#">Filipinos</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Dogs</a></li>
+			<li><a href="#">Cats</a></li>
+		</ul>
+	</li>
+	</ul>
+</div><br><br>
+
+<!-- <div class="JSWM_window_handle" id='div-menuwrapper1'>
+	<div class='dl-trigger' id='button-trigger'>
+		<img src='jswm_jquery/windowMenu/menubtn.png' height='40' width='40'>
+	</div>
+	<ul id='ul-menu' class='menu'>
+		<li><a href='#'>
+			<img class='menu_img' src='imgs/close.png' height='15' width='15' onclick='closeWindow()'>
+			<img class='menu_img' src='imgs/maximize_window.png' height='15' width='15' onclick='maxWindow()'>
+			<img class='menu_img' src='imgs/dock_left.png' height='15' width='15'>
+			<img class='menu_img' src='imgs/dock_right.png' height='15' width='15'>
+		</a></li>
+		<li id='li-bird2'><a id='a-bird2' href="#">Bird</a>
+		<ul id='ul-bird2' class="sub_menu">
+			<li id='li-backbird2'><a id='a-backbird2' class="backbtn" href="#">Back</a></li>
+			<li><a href="#">Falcons</a></li>
+			<li><a href="#">Sparrows</a></li>
+			<li><a href="#">Hawks</a></li>
+			<li><a href="#">Doves</a></li>
+			<li><a href="#">Ducks</a></li>
+			<li><a href="#">Finches</a></li>
+			<li><a href="#">Crows</a></li>
+			<li><a href="#">Owls</a></li>
+		</ul>
+	</li>
+	    <li id='li-mammal2' ><a id='a-mammal2' href="#">Mammal</a>
+		<ul class="sub_menu" id='ul-Mammals2'>
+			<li id='li-mammalback2' ><a id='a-mammalback2' class="backbtn" href="#">Back</a></li>
+			<li id='li-humans2' ><a id='a-humans2' href="#">Humans</a>
+				<ul class="sub_menu" id='ul-Humans2'>
+					<li><a class="backbtn" href="#">Back</a></li>
+					<li><a href="#">Mexicans</a></li>
+					<li><a href="#">Asians</a></li>
+					<li><a href="#">Africans</a></li>
+					<li><a href="#">Filipinos</a></li>
+				</ul>
+			</li>
+			<li id='li-dogs2'><a id='a-dogs2' href="#">Dogs</a></li>
+			<li id='li-cats2'><a id='a-cats2' href="#">Cats</a></li>
+		</ul>
+	</li>
+	</ul>
+</div> -->
+
 	<button type="button" onclick="MakeWindow()">Make Window</button>
 
 </body>

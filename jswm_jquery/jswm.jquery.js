@@ -539,7 +539,6 @@ var JSWM;
         $(this.container).addClass('JSWM_window');
         //this.handle = this.innerContainer.insertBefore(document.createElement('DIV'), this.slide);
 		this.handle = this.innerContainer.getElementsByClassName("JSWM_window_handle")[0];
-		console.log("Find...: " + this.innerContainer.getElementsByClassName("JSWM_window_handle")[0] );
 
         //$(this.handle).addClass('JSWM_window_handle');
         //handleRight = this.handle.appendChild(document.createElement('DIV'));
@@ -718,11 +717,7 @@ var JSWM;
             $(closeButton).addClass('close');
         }*/
 
-    
-
-        $(this.contents).addClass('JSWM_window_contents');
-		console.log("Find: " + this.contents.getElementsByClassName( '.JSWM_window_handle' )[0] );
-				
+        $(this.contents).addClass('JSWM_window_contents');			
         this.titleLabel = this.handle.appendChild(document.createElement('DIV'));
         $(this.titleLabel).addClass('JSWM_window_title');
         if (!this.options.title)

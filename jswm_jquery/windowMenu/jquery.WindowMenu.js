@@ -3,6 +3,7 @@
 (function ( $ ) {
 	//Top level function that makes the list click able
     $.fn.windowMenu = function() {
+		console.log($(this).attr('id') + " was just activated");
 		var wrapper = $(this);
 		$.fn.windowMenu.activate_hover(); //activates hover function every time a menu is created
 		//Fades in if hovered over
@@ -20,7 +21,7 @@
 	
 		var original = $(this).find("ul").first();
 		
-		$(".dl-menuwrapper li:not(ul)" ).click(function () {
+		$(".JSWM_window_handle li:not(ul)" ).click(function () {
 			$.fn.windowMenu.close_menu(original, wrapper);
 		});
 		
