@@ -1,4 +1,6 @@
-var mywindow = null;
+var mywindows = {};
+//var wm = new JSWM();
+var i = 0;
 
 function MakeWindow(){
 	var wm = new JSWM();
@@ -7,19 +9,19 @@ function MakeWindow(){
 	app_div.appendChild(MenuHandle());
 	app_div.appendChild(test);
 	console.log("app_div: " + app_div.getElementsByClassName("JSWM_window_handle")[0] );
-	mywindow = wm.openElement(app_div, 600, 400, 'random', 'random', {}, {}, function(){self.settings_window_open = false;});
-	$( ".JSWM_window_handle").multLvlMenu();
+	mywindows[i++] = wm.openElement(app_div, 600, 400, 'random', 'random', {}, {}, function(){self.settings_window_open = false;});
+	$( ".JSWM_window_handle").windowMenu();
 
 }
 
 
 function menu_html(){
 	var html = '';// "<div class='dl-menuwrapper' id='window_menu'>";
-	html += "<div class='dl-trigger' id='button-trigger'><img id='img-button' src='MultiLvlMenuPlugin/menubtn.png' height='40' width='40'></div>";
+	html += "<div class='dl-trigger' id='button-trigger'><img id='img-button' src='jswm_jquery/windowMenu/menubtn.png' height='40' width='40'></div>";
 	html += "<ul id='ul-menu' class='menu'>";
 	html += "<li><a href='#'>";
 	html += "<img class='menu_img' src='imgs/close.png' height='15' width='15' onclick='closeWindow()'>";
-	html += "<img class='menu_img' src='imgs/maximize_window.png' height='15' width='15'>";
+	html += "<img class='menu_img' src='imgs/maximize_window.png' height='15' width='15' onclick='maxWindow()'>";
 	html += "<img class='menu_img' src='imgs/dock_left.png' height='15' width='15'>";
 	html += "<img class='menu_img' src='imgs/dock_right.png' height='15' width='15'>";
 	html += "</a></li>";
@@ -39,6 +41,11 @@ function MenuHandle(){
 }
 
 function closeWindow(){
-	mywindow.close();
+	mywindows[0].close();
+
+}
+
+function maxWindow(){
+	mywindows[0].maximise();
 
 }

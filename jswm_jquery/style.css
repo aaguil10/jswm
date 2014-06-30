@@ -7,7 +7,7 @@
 	background: #EEEEFF;
 }
 
-.JSWM_window_handle
+/*.JSWM_window_handle
 {
 	border-left-color: #FFFFFF;
 	border-top-color: #FFFFFF;
@@ -21,7 +21,7 @@
 {
 	background: #a6caf0 url('img/window_handle_active_bg.png') top left repeat-y;
 	color: #FFFFFF;
-}
+}*/
 
 .JSWM_window_maximised .JSWM_window_handle
 {
