@@ -2,9 +2,10 @@
 
 /*/////////////////Multilevel Menu css/////////////////*/
 .JSWM_window_handle {
+	clear:none;
 	width: 40px;
-	/*max-width: 16px;
-	float: left;*/
+	/*max-width: 16px;*/
+	float: right;
 	position: relative;
 	z-index: 1;
 	opacity:0;
@@ -17,11 +18,19 @@
     border: none;
     padding: 0;
 	background: #bbbbbb;
+	float: right;
+	position: relative;
+	margin-right: -160;
 }
 
-.JSWM_window_handle button:after {
+/*.JSWM_window_handle #img-button{
+	float: right;
+	margin-right: -160;
+}/*
+
+/*.JSWM_window_handle div:after {
 	/*content: '';*/
-	position: absolute;
+	/*position: absolute;
 	width: 68%;
 	height: 5px;
 	background: #fff;
@@ -30,15 +39,15 @@
 	box-shadow: 
 		0 10px 0 #fff, 
 		0 20px 0 #fff;
-}
+}*/
 
-.JSWM_window_handle button{
-	float: left;
+/*.JSWM_window_handle div{
+	float: right;
 	position: relative;
-}
+}*/
 
 .JSWM_window_handle:first-child {
-	margin-right: 100px;
+	margin-right: 160px;
 }
 
 .JSWM_window_handle li:hover{
@@ -53,7 +62,7 @@
 	width: 200px;
 	list-style: none;
 	-webkit-padding-start: 0;
-	float: left;
+	float: right;
 	max-height: 200px;
 	background: #bbbbbb;
 	position: absolute;

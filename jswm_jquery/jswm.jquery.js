@@ -1120,7 +1120,7 @@ var JSWM;
     JSWindow.prototype.setTitle = function (title, icon) {
         this.title = title;
 
-        // $(this.titlelabel).html('<span>' + title + '</span');
+         $(this.titlelabel).html('<span>' + title + '</span');
         $(this.titleLabel).empty();
         var span = this.titleLabel.appendChild(document.createElement('SPAN'));
         span.appendChild(document.createTextNode(this.title));
