@@ -3,7 +3,7 @@
 (function ( $ ) {
 	//Top level function that makes the list click able
     $.fn.windowMenu = function() {
-		console.log($(this).attr('id') + " was just activated");
+		//console.log($(this).attr('id') + " was just activated");
 		var wrapper = $(this);
 		$.fn.windowMenu.activate_hover(); //activates hover function every time a menu is created
 		//Fades in if hovered over

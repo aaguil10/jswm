@@ -1,18 +1,24 @@
 var mywindows = {};
-//var wm = new JSWM();
 var i = 0;
 
+
+
 function MakeWindow(){
-	var wm = new JSWM();
+	
 	var app_div = document.createElement('div');
 	var test = document.createTextNode("A new window!");
-	app_div.appendChild(MenuHandle('menu' + i, add_on()));
+	//app_div.appendChild(default_menu('menu' + i, closeWindow, maxWindow, ldockWindow, rdockWindow));
 	app_div.appendChild(test);
 	mywindows[i++] = wm.openElement(app_div, 600, 400, 'random', 'random', {}, {}, function(){self.settings_window_open = false;});
-	$( "#menu" + (i-1)).windowMenu();
-
+	//$( "#menu" + (i-1)).windowMenu();
+	//$( "#111" ).windowMenu();
 }
 
+function debug(){
+	//default_menu('111');
+	//$( "#111").windowMenu();
+	closefoo();
+}
 
 function menu_html(MoreHtml){
 	var html = '';// "<div class='dl-menuwrapper' id='window_menu'>";
@@ -31,6 +37,72 @@ function menu_html(MoreHtml){
 
 }
 
+function default_menu(menuid, closeFunc, maxFunc, ldockFunc, rdockFunc){
+	var img_close = document.createElement("img");
+	img_close.setAttribute('src', 'imgs/close.png');
+	img_close.setAttribute('height', '15px');
+	img_close.setAttribute('width', '15px');
+	img_close.setAttribute('class', 'menu_img');
+	img_close.onclick = closeFunc;
+	
+	var img_minmax = document.createElement("img");
+	img_minmax.setAttribute('src', 'imgs/maximize_window.png');
+	img_minmax.setAttribute('height', '15px');
+	img_minmax.setAttribute('width', '15px');
+	img_minmax.setAttribute('class', 'menu_img');
+	img_minmax.onclick = maxFunc;
+	
+	var img_ldock = document.createElement("img");
+	img_ldock.setAttribute('src', 'imgs/dock_left.png');
+	img_ldock.setAttribute('height', '15px');
+	img_ldock.setAttribute('width', '15px');
+	img_ldock.setAttribute('class', 'menu_img');
+	img_ldock.onclick = ldockFunc;
+	
+	var img_rdock = document.createElement("img");
+	img_rdock.setAttribute('src', 'imgs/dock_right.png');
+	img_rdock.setAttribute('height', '15px');
+	img_rdock.setAttribute('width', '15px');
+	img_rdock.setAttribute('onclick', rdockFunc);
+	img_rdock.setAttribute('class', 'menu_img');
+	img_rdock.onclick = rdockFunc;
+
+	var a = document.createElement("a");
+	a.setAttribute('href','#');
+	a.appendChild(img_close);
+	a.appendChild(img_minmax);
+	a.appendChild(img_ldock);
+	a.appendChild(img_rdock);
+	
+	var li = document.createElement("li");
+	li.appendChild(a);
+	
+	var ul = document.createElement("ul");
+	ul.setAttribute('class', 'menu');
+	ul.setAttribute('id', 'ul-menu');
+	ul.appendChild(li);
+	
+	var img_menu = document.createElement("img");
+	img_menu.setAttribute('src', 'jswm_jquery/windowMenu/menubtn.png');
+	img_menu.setAttribute('height', '40px');
+	img_menu.setAttribute('width', '40px');
+	img_menu.setAttribute('onclick', '');
+	img_menu.setAttribute('class', 'img-button');
+	
+	var button = document.createElement("div");
+	button.setAttribute('class', 'dl-trigger');
+	//button.setAttribute('id', 'button-trigger');
+	button.appendChild(img_menu);
+	
+	var wrapper = document.createElement("Div");
+	wrapper.setAttribute('class', 'JSWM_window_handle');
+	wrapper.setAttribute('id', menuid );
+	wrapper.appendChild(button);
+	wrapper.appendChild(ul);
+	
+	return wrapper;
+}
+
 function MenuHandle(menuid, MoreHtml){
 	var wrapper = document.createElement("Div");
 	wrapper.innerHTML = menu_html(MoreHtml);
@@ -42,13 +114,28 @@ function MenuHandle(menuid, MoreHtml){
 
 
 function closeWindow(){
+	console.log("closeapp");
 	mywindows[0].close();
 
-}
+};
+
+function closefoo(){
+	console.log("closeapp");
+	mywindows[0].close();
+
+};
 
 function maxWindow(){
 	mywindows[0].maximise();
 
+}
+
+function ldockWindow(){
+	console.log("Docked Left");
+}
+
+function rdockWindow(){
+	console.log("Docked Right");
 }
 
 function add_on(){
@@ -85,10 +172,11 @@ function add_on(){
 	html += '</li>';
 	return html;
 }
-
+var wm;
 
 $( document ).ready(function() {
-	$( "#menuOne").windowMenu();
-	$( "#menuTwo").windowMenu();
+	wm = new JSWM();
+	//$( "#menuOne").windowMenu();
+	//$( "#menuTwo").windowMenu();
 	
 });

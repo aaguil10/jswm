@@ -514,7 +514,11 @@ var JSWM;
         this.manager = manager;
         this.options = options;
         this.on_close = on_close;
-
+		this.menu = JSWindow.prototype.default_menu(_this);
+	
+		contents.appendChild(this.menu);
+		$(this.menu).windowMenu();
+		
         this.container = this.manager.contents.appendChild(document.createElement('DIV'));
         this.innerContainer = this.container.appendChild(document.createElement('DIV')); 
         if (this.options.noCollapse) {
@@ -1249,7 +1253,6 @@ var JSWM;
      */
     JSWindow.prototype.close = function () {
         //_this = this;
-
         this.manager.windows = $(this.manager.windows).map(function () {
             if (this != _this)
                 return this;
@@ -1275,6 +1278,79 @@ var JSWM;
         
         
     };
+	
+	JSWindow.prototype.dock_left = function () {
+		console.log("docking left");
+	};
+	
+	JSWindow.prototype.dock_right = function () {
+		console.log("docking right");
+	};
+	
+	//creates the the default menu 
+	JSWindow.prototype.default_menu = function (parent){
+		var img_close = document.createElement("img");
+		img_close.setAttribute('src', 'imgs/close.png');
+		img_close.setAttribute('height', '15px');
+		img_close.setAttribute('width', '15px');
+		img_close.setAttribute('class', 'menu_img');
+		img_close.onclick = function(){ parent.close();};
+	
+		var img_minmax = document.createElement("img");
+		img_minmax.setAttribute('src', 'imgs/maximize_window.png');
+		img_minmax.setAttribute('height', '15px');
+		img_minmax.setAttribute('width', '15px');
+		img_minmax.setAttribute('class', 'menu_img');
+		img_minmax.onclick = function(){ parent.maximise();};
+	
+		var img_ldock = document.createElement("img");
+		img_ldock.setAttribute('src', 'imgs/dock_left.png');
+		img_ldock.setAttribute('height', '15px');
+		img_ldock.setAttribute('width', '15px');
+		img_ldock.setAttribute('class', 'menu_img');
+		img_ldock.onclick = function(){ parent.dock_left(); };
+	
+		var img_rdock = document.createElement("img");
+		img_rdock.setAttribute('src', 'imgs/dock_right.png');
+		img_rdock.setAttribute('height', '15px');
+		img_rdock.setAttribute('width', '15px');
+		img_rdock.setAttribute('class', 'menu_img');
+		img_rdock.onclick = function(){ parent.dock_right(); };
+
+		var a = document.createElement("a");
+		a.setAttribute('href','#');
+		a.appendChild(img_close);
+		a.appendChild(img_minmax);
+		a.appendChild(img_ldock);
+		a.appendChild(img_rdock);
+	
+		var li = document.createElement("li");
+		li.appendChild(a);
+	
+		var ul = document.createElement("ul");
+		ul.setAttribute('class', 'menu');
+		ul.setAttribute('id', 'ul-menu');
+		ul.appendChild(li);
+	
+		var img_menu = document.createElement("img");
+		img_menu.setAttribute('src', 'jswm_jquery/windowMenu/menubtn.png');
+		img_menu.setAttribute('height', '40px');
+		img_menu.setAttribute('width', '40px');
+		img_menu.setAttribute('onclick', '');
+		img_menu.setAttribute('class', 'img-button');
+	
+		var button = document.createElement("div");
+		button.setAttribute('class', 'dl-trigger');
+		button.appendChild(img_menu);
+	
+		var wrapper = document.createElement("Div");
+		wrapper.setAttribute('class', 'JSWM_window_handle');
+		wrapper.appendChild(button);
+		wrapper.appendChild(ul);
+	
+		return wrapper;
+	}
+	
 
     /**
      * Window tab
