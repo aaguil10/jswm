@@ -15,9 +15,25 @@ function MakeWindow(){
 }
 
 function debug(){
-	//default_menu('111');
-	//$( "#111").windowMenu();
-	closefoo();
+	var li = document.createElement('li');
+	var a = document.createElement('a');
+	var text = document.createTextNode("New Menu Item");
+	a.appendChild(text);
+	a.onclick = function(){ _this.close();};
+	li.appendChild(a);
+	//mywindows[0].add_menu_item(li);
+	//mywindows[0].add_menu_item( bigMenu() );
+	mywindows[0].add_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
+	mywindows[0].add_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
+	mywindows[0].add_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
+	mywindows[0].add_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
+	mywindows[0].add_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
+	mywindows[0].add_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
+	
+}
+
+function callthisfunction(){
+	console.log("Some function was called");
 }
 
 function menu_html(MoreHtml){
@@ -138,8 +154,29 @@ function rdockWindow(){
 	console.log("Docked Right");
 }
 
+function bigMenu(){
+	var ul = document.createElement("ul");
+	ul.setAttribute('class', 'sub_menu');
+	ul.innerHTML = add_on();
+	
+	var a = document.createElement('a');
+	var text = document.createTextNode("Big Menu");
+	a.appendChild(text);
+	
+	
+	var wrapper = document.createElement("li");
+	wrapper.setAttribute('id', 'extra menu' );
+	wrapper.appendChild(a);
+	wrapper.appendChild(ul);
+	
+	
+	return  wrapper;
+
+}
+
 function add_on(){
 	var html = '';
+	html += '<li><a class="backbtn" href="#">Back</a></li>';
 	html += "<li><a href='#'>Pollo</a></li>";
 	html += '<li><a href="#">Bird</a>';
 	html += '	<ul class="sub_menu">';
@@ -178,5 +215,7 @@ $( document ).ready(function() {
 	wm = new JSWM();
 	//$( "#menuOne").windowMenu();
 	//$( "#menuTwo").windowMenu();
+	
+	
 	
 });

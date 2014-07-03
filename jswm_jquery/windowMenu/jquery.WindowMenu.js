@@ -156,18 +156,19 @@
 		});
 	}
 	
-	//responsible for the hover images NOTE: all hover images must be "myImage_hover.png" to work
+	//responsible for the hover images NOTE: all hover images must be "_hover.png" added to the end to work
 	$.fn.windowMenu.activate_hover = function(){
-	$( document ).ready(function() {
+		console.log("In activate_hover");
 		$('.menu_img').data('hoverOnce', false);
 		$('.menu_img').hover(function(){
+			console.log( 'Hover: AHHHHHH');
 			if($(this).data('hoverOnce') === false){
 				$('.menu_img').data('hoverOnce', true);
 				var tmp = $(this).attr('src');
 				tmp = tmp.substring(0, tmp.length-4);
 				var hover = tmp + '_hover.png';
 				$(this).attr('src', hover);
-				//console.log( 'Hover:', hover );
+				console.log( 'Hover:', hover );
 			}
 		});
 		$('.menu_img').mouseleave(function(){
@@ -177,12 +178,15 @@
 				tmp = tmp.substring(0, tmp.length-10);
 				var hover = tmp + '.png';
 				$(this).attr('src', hover);
-				//console.log( 'leave:', hover );
+				console.log( 'leave:', hover );
 			}
 		});
-	});
-	}
 	
+	}
+
+	$( document ).ready(function() {
+		$.fn.windowMenu.activate_hover();
+	});
 }( jQuery ));
 
 

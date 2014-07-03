@@ -515,9 +515,11 @@ var JSWM;
         this.options = options;
         this.on_close = on_close;
 		this.menu = JSWindow.prototype.default_menu(_this);
+		this.menu.icon_count = null;
 	
 		contents.appendChild(this.menu);
 		$(this.menu).windowMenu();
+		$(this.menu).windowMenu.activate_hover();
 		
         this.container = this.manager.contents.appendChild(document.createElement('DIV'));
         this.innerContainer = this.container.appendChild(document.createElement('DIV')); 
@@ -1319,12 +1321,14 @@ var JSWM;
 
 		var a = document.createElement("a");
 		a.setAttribute('href','#');
+		a.setAttribute('id','a_');
 		a.appendChild(img_close);
 		a.appendChild(img_minmax);
 		a.appendChild(img_ldock);
 		a.appendChild(img_rdock);
 	
 		var li = document.createElement("li");
+		li.setAttribute('id','li_');
 		li.appendChild(a);
 	
 		var ul = document.createElement("ul");
@@ -1341,16 +1345,89 @@ var JSWM;
 	
 		var button = document.createElement("div");
 		button.setAttribute('class', 'dl-trigger');
+		button.setAttribute('id','trigger_div');
 		button.appendChild(img_menu);
 	
 		var wrapper = document.createElement("Div");
 		wrapper.setAttribute('class', 'JSWM_window_handle');
+		wrapper.setAttribute('id','wrapper_div');
 		wrapper.appendChild(button);
 		wrapper.appendChild(ul);
 	
 		return wrapper;
 	}
 	
+	//adds one li menu item which can have sub-menus inbeded in it. 
+	JSWindow.prototype.add_menu_item = function (li_element) {
+		var pivot = $(this.menu).find('ul');
+		pivot.append(li_element);
+		$(this.menu).windowMenu();
+	}
+	
+	JSWindow.prototype.add_item = function (title, icon_url, mode, parent, onclickFunc) {
+		var li = document.createElement("li");
+		var a = document.createElement("a");
+		a.setAttribute('href','#');
+		a.onclick = onclickFunc;
+			
+		if(mode === 'icon'){
+			var img = document.createElement("img");
+			img.setAttribute('src', icon_url);
+			img.setAttribute('height', '15px');
+			img.setAttribute('width', '15px');
+			img.setAttribute('class', 'menu_img');
+			if(this.menu.icon_count === null){
+				a.appendChild(img);
+				li.appendChild(a);
+				this.menu.icon_count = 1;
+				var pivot = $(this.menu).find('ul');
+				pivot.append(li);
+				return;
+			}else{
+				this.menu.icon_count++;
+				var pivot = $(this.menu).find('ul').find('li').last().find('a');
+				pivot.append(img);
+				if(this.menu.icon_count >= 4){this.menu.icon_count = null;}
+				return;
+			}
+		}
+	
+	
+		//create li element
+		var li = document.createElement("li");
+		
+		if(mode === 'title'){
+			var text = document.createTextNode(title);
+			//var a = document.createElement("a");
+			//a.setAttribute('href','#');
+			a.appendChild(text);
+			//a.onclick = onclickFunc;
+			li.appendChild(a);
+		}
+		
+		if(mode === 'icon_title'){
+			var img = document.createElement("img");
+			img.setAttribute('src', icon_url);
+			img.setAttribute('height', '15px');
+			img.setAttribute('width', '15px');
+			img.setAttribute('class', 'icon_title');
+		
+			var text = document.createTextNode(title);
+			
+			//var a = document.createElement("a");
+			a.appendChild(img);
+			//a.setAttribute('href','#');
+			a.appendChild(text);
+			//a.onclick = onclickFunc;
+			li.appendChild(a);
+		}
+		console.log("Called add_item()");
+		//add menu
+		var pivot = $(this.menu).find('ul');
+		pivot.append(li);
+		
+		//$(this.menu).windowMenu(); //apply menu properties
+	}
 
     /**
      * Window tab
