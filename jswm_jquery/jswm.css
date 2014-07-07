@@ -127,11 +127,13 @@
 .JSWM_window_resizeSW
 {
   cursor: sw-resize;
+  top: 392px !important;
 }
 
 .JSWM_window_resizeSE
 {
   cursor: se-resize;
+  top: 392px !important;
 }
 
 .JSWM_tabList
