@@ -767,7 +767,8 @@ var JSWM;
             l = this.manager.getWindowSize().width - w - 10;
             break;
         case 'random':
-            l = Math.floor((Math.random()*300)+300) //edit 
+            //l = Math.floor((Math.random()*300)+300) //edit
+			l = Math.floor((Math.random()*300));
             break; 
         }
 
