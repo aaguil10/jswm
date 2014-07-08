@@ -738,12 +738,15 @@ var JSWM;
                 },
                 drag: function (drag, ui) {
                     ui.position.top = Math.max(0 + _this.manager.margins[0], ui.position.top);
+					$(this.handle).click(function(e){ console.log('haaaaaa'); e.stopPropagation(); });
                 },
                 stop: function () {
                     _this.ondrop();
                     _this.setActive();
-                }
+					$(_this.menu).find('ul').first().data("dragged", 1);
+				}
             });
+			
 			$( this.handle ).disableSelection();
             $(this.innerContainer).mousedown(function () {
                 _this.setActive();
@@ -751,10 +754,6 @@ var JSWM;
             $(this.handle).mousedown(function () {
                 _this.setActive();
             });
-			/*$('#window_menu').mousedown(function () {
-                _this.setActive();
-            });*/
-			//console.log("this.handle: " + this.handle);
         }
         switch (String(l).toLowerCase()) {
         case 'left':

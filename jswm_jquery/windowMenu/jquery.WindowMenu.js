@@ -26,6 +26,7 @@
 		});
 		
 		original.data("toggle", 0);	//used to toggle menu off and on
+		original.data("dragged", 0);
 		original.data("curr_ul", null);	//used to get the current sub-menu being displayed
 		$.fn.windowMenu.click_out($(this), original);
 		original.children().hide();
@@ -35,7 +36,11 @@
 		});
 		var menu_button = $(this).find(".dl-trigger").first();
 		menu_button.click(function() {
-			if(original.data("toggle") === 0){	//if menu is not displaying display menu
+			if(original.data("dragged") === 1){
+				original.data("dragged", 0);
+				return;
+			}
+			if(original.data("toggle") === 0 ){	//if menu is not displaying display menu
 				original.data("toggle", 1);
 				original.children().show();
 				original.find("ul").each(function() { 
@@ -158,17 +163,14 @@
 	
 	//responsible for the hover images NOTE: all hover images must be "_hover.png" added to the end to work
 	$.fn.windowMenu.activate_hover = function(){
-		console.log("In activate_hover");
 		$('.menu_img').data('hoverOnce', false);
 		$('.menu_img').hover(function(){
-			console.log( 'Hover: AHHHHHH');
 			if($(this).data('hoverOnce') === false){
 				$('.menu_img').data('hoverOnce', true);
 				var tmp = $(this).attr('src');
 				tmp = tmp.substring(0, tmp.length-4);
 				var hover = tmp + '_hover.png';
 				$(this).attr('src', hover);
-				console.log( 'Hover:', hover );
 			}
 		});
 		$('.menu_img').mouseleave(function(){
@@ -178,7 +180,6 @@
 				tmp = tmp.substring(0, tmp.length-10);
 				var hover = tmp + '.png';
 				$(this).attr('src', hover);
-				console.log( 'leave:', hover );
 			}
 		});
 	
