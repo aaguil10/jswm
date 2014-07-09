@@ -1286,7 +1286,7 @@ var JSWM;
 		console.log("docking right");
 	};
 	
-	//creates the the default menu 
+	//returns default window menu 
 	JSWindow.prototype.default_menu = function (parent){
 		var img_close = document.createElement("img");
 		img_close.setAttribute('src', 'imgs/close.png');
@@ -1441,7 +1441,7 @@ var JSWM;
 		return li;
 	}
 	
-	//Should be called after all menus have been added
+	//Should be called after all menu items have been added
 	JSWindow.prototype.activate_menu = function () {
 		console.log('menu activated');
 		$(this.menu).windowMenu();
