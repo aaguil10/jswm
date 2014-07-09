@@ -10,8 +10,18 @@ function MakeWindow(){
 	//app_div.appendChild(default_menu('menu' + i, closeWindow, maxWindow, ldockWindow, rdockWindow));
 	app_div.appendChild(test);
 	mywindows[i++] = wm.openElement(app_div, 600, 400, 'random', 'random', {}, {}, function(){self.settings_window_open = false;});
-	//$( "#menu" + (i-1)).windowMenu();
-	//$( "#111" ).windowMenu();
+
+	mywindows[0].add_menu_item('turky', 'imgs/dock_right.png', 'icon', mywindows[0].menu, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_left.png', 'icon', mywindows[0].menu, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_right.png', 'icon', mywindows[0].menu, callthisfunction);
+		mywindows[0].add_menu_item('turky', 'imgs/dock_right.png', 'icon', mywindows[0].menu, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_left.png', 'icon', mywindows[0].menu, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_right.png', 'icon', mywindows[0].menu, callthisfunction);
+	mywindows[0].add_menu_item('Just Beans', 'imgs/dock_left.png', 'title', mywindows[0].menu, callthisfunction);
+	var nextlvl  = mywindows[0].add_menu_item('A Way', 'imgs/dock_right.png', 'icon_title', mywindows[0].menu, callthisfunction);
+	mywindows[0].add_menu_item('Just Frijoles', 'imgs/dock_left.png', 'title', nextlvl, callthisfunction);
+	mywindows[0].add_menu_item('One', 'imgs/dock_left.png', 'icon_title', nextlvl, callthisfunction);
+	mywindows[0].activate_menu();
 }
 
 function debug(){
@@ -23,12 +33,14 @@ function debug(){
 	li.appendChild(a);
 	//mywindows[0].add_menu_item(li);
 	//mywindows[0].add_menu_item( bigMenu() );
-	mywindows[0].add_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
-	mywindows[0].add_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
-	mywindows[0].add_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
-	mywindows[0].add_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
-	mywindows[0].add_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
-	mywindows[0].add_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_left.png', 'icon', null, callthisfunction);
+	mywindows[0].add_menu_item('turky', 'imgs/dock_right.png', 'icon', null, callthisfunction);
+	mywindows[0].add_menu_item('Just Beans', 'imgs/dock_left.png', 'title', null, callthisfunction);
+	mywindows[0].add_menu_item('A Way', 'imgs/dock_right.png', 'icon_title', null, callthisfunction);
+	//$(mywindows[0].menu).windowMenu.scroll(mywindows[0].find('ul').first() );
+	mywindows[0].activate_menu();
 	
 }
 

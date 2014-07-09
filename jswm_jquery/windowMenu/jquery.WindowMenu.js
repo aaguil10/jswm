@@ -20,9 +20,9 @@
 		});
 	
 		var original = $(this).find("ul").first();
-		
+		$.fn.windowMenu.scroll(original);
 		$(".JSWM_window_handle li:not(ul)" ).click(function () {
-			$.fn.windowMenu.close_menu(original, wrapper);
+			$.fn.windowMenu.close_menu(original, wrapper, false);
 		});
 		
 		original.data("toggle", 0);	//used to toggle menu off and on
@@ -36,9 +36,9 @@
 		});
 		var menu_button = $(this).find(".dl-trigger").first();
 		menu_button.click(function() {
-			if(original.data("dragged") === 1){
+			if(original.data("dragged") === 1){	//does not open menu if menu was dragged
 				original.data("dragged", 0);
-				return;
+				return false;
 			}
 			if(original.data("toggle") === 0 ){	//if menu is not displaying display menu
 				original.data("toggle", 1);
@@ -48,15 +48,7 @@
 				});
 				$(this).siblings().show();
 			}else{	//if menu is displaying hide menu
-				original.data("toggle", 0);
-				if (original.data("curr_ul") != null){
-					var ul_curr = original.data("curr_ul");
-					$.fn.windowMenu.recurDisplay(ul_curr, original);
-				}
-				original.children().hide();
-				original.find("ul").each(function() {  //find every sub list and apply properties
-					$(this).hide();
-				});
+				$.fn.windowMenu.close_menu(original, wrapper, false);
 			}	
 			return false;
 		});
@@ -89,6 +81,7 @@
 			
 		});
 	};
+	
 	
 	//Makes you move back to previous list menu.
 	$.fn.windowMenu.moveBack = function(ul_curr, orignal){
@@ -137,9 +130,11 @@
 		}
 	};
 	
-	$.fn.windowMenu.close_menu = function(original, wrapper){
+	$.fn.windowMenu.close_menu = function(original, wrapper, anime){
 		original.data("toggle", 0);
-		wrapper.animate({opacity:0},100);
+		if(anime === true){	//animate out menu button 
+			wrapper.animate({opacity:0},100);
+		}
 		if (original.data("curr_ul") != null){
 			var ul_curr = original.data("curr_ul");
 				$.fn.windowMenu.recurDisplay(ul_curr, original);
@@ -148,13 +143,14 @@
 			original.find("ul").each(function() {  //find every sub list and apply properties
 				$(this).hide();
 			});
+			original.hide();
 		return false;
 	};
 	
 	//Makes menu disappear if user clicks outside of div
 	$.fn.windowMenu.click_out = function(wrapper,original){
 		$('html').click(function () {
-			$.fn.windowMenu.close_menu(original,wrapper);
+			$.fn.windowMenu.close_menu(original,wrapper, true);
 		});
 		wrapper.click(function (e) {
 			e.stopPropagation();
@@ -185,10 +181,5 @@
 	
 	}
 
-	$( document ).ready(function() {
-		$.fn.windowMenu.activate_hover();
-	});
 }( jQuery ));
-
-
 

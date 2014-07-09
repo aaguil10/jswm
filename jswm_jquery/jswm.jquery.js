@@ -518,8 +518,6 @@ var JSWM;
 		this.menu.icon_count = null;
 	
 		contents.appendChild(this.menu);
-		$(this.menu).windowMenu();
-		$(this.menu).windowMenu.activate_hover();
 		
         this.container = this.manager.contents.appendChild(document.createElement('DIV'));
         this.innerContainer = this.container.appendChild(document.createElement('DIV')); 
@@ -738,7 +736,6 @@ var JSWM;
                 },
                 drag: function (drag, ui) {
                     ui.position.top = Math.max(0 + _this.manager.margins[0], ui.position.top);
-					$(this.handle).click(function(e){ console.log('haaaaaa'); e.stopPropagation(); });
                 },
                 stop: function () {
                     _this.ondrop();
@@ -1340,7 +1337,7 @@ var JSWM;
 		img_menu.setAttribute('src', 'jswm_jquery/windowMenu/menubtn.png');
 		img_menu.setAttribute('height', '40px');
 		img_menu.setAttribute('width', '40px');
-		img_menu.setAttribute('onclick', '');
+		//img_menu.setAttribute('onclick', '');
 		img_menu.setAttribute('class', 'img-button');
 	
 		var button = document.createElement("div");
@@ -1353,22 +1350,26 @@ var JSWM;
 		wrapper.setAttribute('id','wrapper_div');
 		wrapper.appendChild(button);
 		wrapper.appendChild(ul);
+		$(wrapper).data('has_sub_menu',1);
 	
 		return wrapper;
 	}
 	
-	//adds one li menu item which can have sub-menus inbeded in it. 
-	JSWindow.prototype.add_menu_item = function (li_element) {
-		var pivot = $(this.menu).find('ul');
-		pivot.append(li_element);
-		$(this.menu).windowMenu();
-	}
-	
-	JSWindow.prototype.add_item = function (title, icon_url, mode, parent, onclickFunc) {
+	    /**
+     * Adds item to local menu 
+     * @method
+     * @param {title} The text inside item
+     * @param {icon_url} Url of icon you want to appear
+     * @param {mode} 'icon' 'icon_title' 'title' are your choices of what to display
+     * @param {parent} Pass parent li element or mywindow.menu 
+	 * @param {onclickFunc} Pass function you want to run when your item is clicked 
+	 * @return {Element}  li item that was added to the menu 
+     */
+	JSWindow.prototype.add_menu_item = function (title, icon_url, mode, parent, onclickFunc) {
 		var li = document.createElement("li");
+		$(li).data('has_sub_menu',0);
 		var a = document.createElement("a");
 		a.setAttribute('href','#');
-		a.onclick = onclickFunc;
 			
 		if(mode === 'icon'){
 			var img = document.createElement("img");
@@ -1376,32 +1377,27 @@ var JSWM;
 			img.setAttribute('height', '15px');
 			img.setAttribute('width', '15px');
 			img.setAttribute('class', 'menu_img');
+			img.onclick = onclickFunc;
 			if(this.menu.icon_count === null){
 				a.appendChild(img);
 				li.appendChild(a);
 				this.menu.icon_count = 1;
-				var pivot = $(this.menu).find('ul');
+				var pivot = $(parent).find('ul').first();
 				pivot.append(li);
 				return;
 			}else{
 				this.menu.icon_count++;
-				var pivot = $(this.menu).find('ul').find('li').last().find('a');
+				var pivot = $(parent).find('ul').find('li').last().find('a');
 				pivot.append(img);
 				if(this.menu.icon_count >= 4){this.menu.icon_count = null;}
 				return;
 			}
 		}
 	
-	
-		//create li element
-		var li = document.createElement("li");
-		
+		a.onclick = onclickFunc;
 		if(mode === 'title'){
 			var text = document.createTextNode(title);
-			//var a = document.createElement("a");
-			//a.setAttribute('href','#');
 			a.appendChild(text);
-			//a.onclick = onclickFunc;
 			li.appendChild(a);
 		}
 		
@@ -1411,24 +1407,46 @@ var JSWM;
 			img.setAttribute('height', '15px');
 			img.setAttribute('width', '15px');
 			img.setAttribute('class', 'icon_title');
-		
 			var text = document.createTextNode(title);
-			
-			//var a = document.createElement("a");
 			a.appendChild(img);
-			//a.setAttribute('href','#');
 			a.appendChild(text);
-			//a.onclick = onclickFunc;
 			li.appendChild(a);
 		}
-		console.log("Called add_item()");
-		//add menu
-		var pivot = $(this.menu).find('ul');
-		pivot.append(li);
-		
-		//$(this.menu).windowMenu(); //apply menu properties
-	}
 
+		//insert item to local menu
+		if( $(parent).data('has_sub_menu') === 1){	//if sub-menu already exist
+			var pivot = $(parent).find('ul').first();
+			console.log('pivot: ' + pivot);
+			pivot.append(li);
+		}else{	//creates new sub-menu if it does not exist
+			//new sub-menu
+			var ul = document.createElement("ul");
+			ul.setAttribute('class', 'sub_menu');
+			
+			//make back button
+			var back_li = document.createElement('li');
+			var back_a = document.createElement('a');
+			back_a.setAttribute('class', 'backbtn');
+			back_a.setAttribute('href','#');
+			var txt = document.createTextNode("Back");
+			back_a.appendChild(txt);
+			back_li.appendChild(back_a);
+			
+			$(ul).append(back_li);
+			$(ul).append(li);
+			$(parent).append(ul);
+			$(parent).data('has_sub_menu',1);
+			
+		}
+		return li;
+	}
+	
+	//Should be called after all menus have been added
+	JSWindow.prototype.activate_menu = function () {
+		console.log('menu activated');
+		$(this.menu).windowMenu();
+	}
+	
     /**
      * Window tab
      * @constructor
