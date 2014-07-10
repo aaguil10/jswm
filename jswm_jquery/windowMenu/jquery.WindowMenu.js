@@ -35,24 +35,37 @@
 				$.fn.windowMenu.movefoward( $(this), original );
 		});
 		var menu_button = $(this).find(".dl-trigger").first();
-		menu_button.click(function() {
-			if(original.data("dragged") === 1){	//does not open menu if menu was dragged
-				original.data("dragged", 0);
-				return false;
-			}
-			if(original.data("toggle") === 0 ){	//if menu is not displaying display menu
-				original.data("toggle", 1);
-				original.children().show();
-				original.find("ul").each(function() { 
-					$(this).hide();
-				});
-				$(this).siblings().show();
-			}else{	//if menu is displaying hide menu
-				$.fn.windowMenu.close_menu(original, wrapper, false);
-			}	
-			return false;
+		menu_button.click(function(e) {
+			e.preventDefault();	//meant to postpone the click function for 250 milliseconds  
+			var menu_btn = this;//in order to not conflict with double click
+			console.log("wrapper:", wrapper.attr('class') );
+			setTimeout(function() {
+				var double = parseInt(wrapper.data('double'), 10);
+				if (double > 0) {
+					wrapper.data('double', double-1);
+					return false;
+				} else {
+					//code for click event
+					if(original.data("dragged") === 1){	//does not open menu if menu was dragged
+						original.data("dragged", 0);
+						return false;
+					}
+					if(original.data("toggle") === 0 ){	//if menu is not displaying display menu
+						original.data("toggle", 1);
+						original.children().show();
+						original.find("ul").each(function() { 
+							$(this).hide();
+						});
+						$(menu_btn).siblings().show();
+					}else{	//if menu is displaying hide menu
+						$.fn.windowMenu.close_menu(original, wrapper, false);
+					}	
+					return false;
+			
+				}
+			}, 250);
+			return this;
 		});
-        return this;
     };
 	
 	//makes the menu move forward and calls function to make menu move back 
