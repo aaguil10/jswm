@@ -517,8 +517,7 @@ var JSWM;
 		this.menu = JSWindow.prototype.default_menu(_this);
 		this.menu.icon_count = null;
 	
-		//contents.appendChild(this.menu);
-		$(this.menu).prependTo(contents);
+		contents.appendChild(this.menu);
 		
         this.container = this.manager.contents.appendChild(document.createElement('DIV'));
         this.innerContainer = this.container.appendChild(document.createElement('DIV')); 

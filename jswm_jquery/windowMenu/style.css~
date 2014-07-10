@@ -17,7 +17,7 @@
 .dl-trigger{
     border: none;
     padding: 0;
-	background: #37ABC8;
+	background: #bbbbbb;
 	float: right;
 	position: relative;
 	margin-right: -160;
@@ -51,7 +51,7 @@
 }
 
 .JSWM_window_handle li:hover{
-	background: #76CDE3;
+	background: #cccccc;
 }
 
 .JSWM_window_handle ul {
@@ -64,7 +64,7 @@
 	-webkit-padding-start: 0;
 	float: right;
 	max-height: 200px;
-	background: #37ABC8;
+	background: #bbbbbb;
 	position: absolute;
 	top: 45px;
 }
@@ -91,7 +91,7 @@
 }
 
 .JSWM_window_handle .backbtn {
-	background: #2C869D;
+	background: #aaaaaa;
 
 }
 
