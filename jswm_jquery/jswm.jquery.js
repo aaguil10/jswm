@@ -664,8 +664,10 @@ var JSWM;
             $(this.resizeSE).mousedown(function () {
                 _this.setActive();
             });
-            $(this.handle).dblclick(function () {
+            $(this.handle).dblclick(function (e) {
+				$(this).data('double', 2);	//Stops 1 click event from triggering
                 _this.maximise();
+				e.stopPropagation();
             });
             $(window).resize(function () {
                 _this.updateMaximise();
