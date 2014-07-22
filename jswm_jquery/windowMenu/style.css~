@@ -2,9 +2,7 @@
 
 /*/////////////////Multilevel Menu css/////////////////*/
 .JSWM_window_handle {
-	clear:none;
-	width: 40px;
-	/*max-width: 16px;*/
+	width: 40px; 
 	float: right;
 	position: relative;
 	z-index: 1;
@@ -15,20 +13,16 @@
 .JSWM_window_handle button:hover,
 .JSWM_window_handle button.dl-active,
 .dl-trigger{
-    border: none;
-    padding: 0;
+	border: none;
+  padding: 0;
 	background: #bbbbbb;
 	float: right;
 	position: relative;
-	margin-right: -160;
+	margin-right: 0px;
+	background: #37ABC8;
 }
 
-/*.JSWM_window_handle #img-button{
-	float: right;
-	margin-right: -160;
-}/*
-
-/*.JSWM_window_handle div:after {
+/*.JSWM_window_handle button:after {
 	/*content: '';*/
 	/*position: absolute;
 	width: 68%;
@@ -39,10 +33,10 @@
 	box-shadow: 
 		0 10px 0 #fff, 
 		0 20px 0 #fff;
-}*/
+}
 
-/*.JSWM_window_handle div{
-	float: right;
+.JSWM_window_handle button{
+	float: left;
 	position: relative;
 }*/
 
@@ -51,20 +45,20 @@
 }
 
 .JSWM_window_handle li:hover{
-	background: #cccccc;
+	background: #76CDE3;
 }
 
 .JSWM_window_handle ul {
 	padding: 0px; 
 	margin:0px; 
-	margin-left: -40px;
+	margin-left: -200px;
 	margin-top: 0px;
 	width: 200px;
 	list-style: none;
 	-webkit-padding-start: 0;
 	float: right;
 	max-height: 200px;
-	background: #bbbbbb;
+	background: #37ABC8;
 	position: absolute;
 	top: 45px;
 }
@@ -91,7 +85,7 @@
 }
 
 .JSWM_window_handle .backbtn {
-	background: #aaaaaa;
+	background: #2C869D;
 
 }
 
@@ -100,8 +94,7 @@
 
 }
 
-.JSWM_window_handle .icon_title{
-	margin-right: 15px;
-
-}
-
+.JSWM_window_handle .icon_title{ 	 	
+		margin-right: 15px; 	 	
+	 	 	
+} 

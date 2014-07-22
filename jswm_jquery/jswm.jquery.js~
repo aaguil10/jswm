@@ -517,7 +517,8 @@ var JSWM;
 		this.menu = JSWindow.prototype.default_menu(_this);
 		this.menu.icon_count = null;
 	
-		contents.appendChild(this.menu);
+		//contents.appendChild(this.menu);
+		$(this.menu).prependTo(contents);
 		
         this.container = this.manager.contents.appendChild(document.createElement('DIV'));
         this.innerContainer = this.container.appendChild(document.createElement('DIV')); 
@@ -664,8 +665,10 @@ var JSWM;
             $(this.resizeSE).mousedown(function () {
                 _this.setActive();
             });
-            $(this.handle).dblclick(function () {
+            $(this.handle).dblclick(function (e) {
+				$(this).data('double', 2);	//Stops 1 click event from triggering
                 _this.maximise();
+				e.stopPropagation();
             });
             $(window).resize(function () {
                 _this.updateMaximise();

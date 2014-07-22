@@ -52,11 +52,11 @@
 					if(original.data("toggle") === 0 ){	//if menu is not displaying display menu
 						original.data("toggle", 1);
 						original.children().show();
+						$.fn.windowMenu.scroll(original, original);
 						original.find("ul").each(function() { 
 							$(this).hide();
 						});
 						$(menu_btn).siblings().show();
-						$.fn.windowMenu.scroll(original, original);
 					}else{	//if menu is displaying hide menu
 						$.fn.windowMenu.close_menu(original, wrapper, false);
 					}	

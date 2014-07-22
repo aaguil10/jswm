@@ -514,11 +514,18 @@ var JSWM;
         this.manager = manager;
         this.options = options;
         this.on_close = on_close;
-		this.menu = JSWindow.prototype.default_menu(_this);
-		this.menu.icon_count = null;
-	
-		//contents.appendChild(this.menu);
-		$(this.menu).prependTo(contents);
+		    this.menu = this.default_menu();
+    		this.menu.icon_count = null;
+
+		//add menu content div
+		var old_div = $(contents).find("div").first();
+		if( old_div.attr('class') != 'JSWM_window_handle'){
+			$(this.menu).prependTo(contents);
+			//console.log('created new menu', old_div.attr('class') );
+		}else{	//make this.menu = to the menu already created
+			this.menu = old_div[0];
+			//console.log('reusing old menu', $(this.menu).attr('class') );
+		}
 		
         this.container = this.manager.contents.appendChild(document.createElement('DIV'));
         this.innerContainer = this.container.appendChild(document.createElement('DIV')); 
@@ -699,7 +706,7 @@ var JSWM;
         }
 
         if (!this.options.noShadow && pngSupport) {
-            var shadowContainer = this.container.insertBefore(document.createElement('DIV'), this.innerContainer);
+           /* var shadowContainer = this.container.insertBefore(document.createElement('DIV'), this.innerContainer);
             $(shadowContainer).addClass('JSWM_shadow_container');
 
             this.shadowNE = shadowContainer.appendChild(document.createElement('DIV'));
@@ -712,7 +719,7 @@ var JSWM;
             this.shadowS = shadowContainer.appendChild(document.createElement('DIV'));
             $(this.shadowS).addClass('JSWM_shadowS');
             this.shadowE = shadowContainer.appendChild(document.createElement('DIV'));
-            $(this.shadowE).addClass('JSWM_shadowE');
+            $(this.shadowE).addClass('JSWM_shadowE');*/
         }
 
         /*if (!this.options.noClose) {
@@ -739,6 +746,7 @@ var JSWM;
                 },
                 drag: function (drag, ui) {
                     ui.position.top = Math.max(0 + _this.manager.margins[0], ui.position.top);
+										$(_this.menu).find('ul').first().data("dragged", 1);
                 },
                 stop: function () {
                     _this.ondrop();
@@ -1157,14 +1165,14 @@ var JSWM;
      * @method
      */
     JSWindow.prototype.redrawShadow = function () {
-        if (!this.options.noShadow && pngSupport) {
+        /*if (!this.options.noShadow && pngSupport) {
             var w = $(this.innerContainer).width();
             var h = $(this.innerContainer).height();
             /*
             if(this.expanded)
                 h += 2; // combined border width of top and bottom
             */
-            $(this.shadowNE).css({left: w + 'px'});
+            /*$(this.shadowNE).css({left: w + 'px'});
             $(this.shadowSE).css({left: w + 'px'});
             $(this.shadowE).css({left: w + 'px'});
             $(this.shadowSW).css({top: h + 'px'});
@@ -1174,7 +1182,7 @@ var JSWM;
                 $(this.shadowS).css({width: (w - 6) + 'px'});
             if (h > 6)
                 $(this.shadowE).css({height: (h - 6) + 'px'});
-        }
+        }*/
     };
 
     /**
@@ -1239,7 +1247,7 @@ var JSWM;
         }
 
         serialData.expanded = this.expanded;
-        serialData.zIndex = $(this.container).css('zIndex');;
+        serialData.zIndex = $(this.container).css('zIndex');
         serialData.tabs = new Array();
         for (var i = 0; i < this.tabs.length; i++) {
             serialData.tabs[i] = this.tabs[i].writeObject();
@@ -1290,7 +1298,9 @@ var JSWM;
 	};
 	
 	//returns default window menu 
-	JSWindow.prototype.default_menu = function (parent){
+	JSWindow.prototype.default_menu = function (){
+		var parent = this;
+
 		var img_close = document.createElement("img");
 		img_close.setAttribute('src', 'imgs/close.png');
 		img_close.setAttribute('height', '15px');
@@ -1387,13 +1397,13 @@ var JSWM;
 				this.menu.icon_count = 1;
 				var pivot = $(parent).find('ul').first();
 				pivot.append(li);
-				return;
+				return li;
 			}else{
 				this.menu.icon_count++;
 				var pivot = $(parent).find('ul').find('li').last().find('a');
 				pivot.append(img);
 				if(this.menu.icon_count >= 4){this.menu.icon_count = null;}
-				return;
+				return $(parent).find('ul').find('li').last();
 			}
 		}
 	
@@ -1419,7 +1429,7 @@ var JSWM;
 		//insert item to local menu
 		if( $(parent).data('has_sub_menu') === 1){	//if sub-menu already exist
 			var pivot = $(parent).find('ul').first();
-			console.log('pivot: ' + pivot);
+			//console.log('pivot: ' + pivot);
 			pivot.append(li);
 		}else{	//creates new sub-menu if it does not exist
 			//new sub-menu
@@ -1446,8 +1456,14 @@ var JSWM;
 	
 	//Should be called after all menu items have been added
 	JSWindow.prototype.activate_menu = function () {
-		console.log('menu activated');
-		$(this.menu).windowMenu();
+		//Only activate the menu once
+		if( $(this.menu).data('activated_once') != true){
+			$(this.menu).windowMenu();
+			$(this.menu).data('activated_once', true);
+			//console.log('menu activated');
+		}else{
+			console.log('ERROR: activated menu more than once!');
+		}
 	}
 	
     /**
